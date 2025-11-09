@@ -21,8 +21,21 @@ public static class SetsAndMaps
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
     public static string[] FindPairs(string[] words)
     {
+        var results = new List<string>();
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        foreach (var word in words)
+        {
+            string reversed = word[1].ToString() + word[0].ToString(); //["am", "at", "ma", "if", "fi"]);
+
+            if (words.Contains(reversed) && !results.Contains(reversed + " & " + word))
+            {
+                Console.WriteLine("Par encontrado: " + word + " & " + reversed);
+
+                results.Add(word + " & " + reversed);
+            }
+        }
+
+        return results.ToArray();
     }
 
     /// <summary>
@@ -43,8 +56,16 @@ public static class SetsAndMaps
         {
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
+            if (degrees.ContainsKey(fields[3]))
+            {
+                degrees[fields[3]] += 1;
+            }
+            else
+            {
+                degrees.Add(fields[3], 1);
+            }
+            
         }
-
         return degrees;
     }
 
@@ -67,7 +88,49 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        var dict1 = new SortedDictionary<char, int>();
+        var dict2 = new SortedDictionary<char, int>();
+
+        word1 = word1.Replace(" ", "").ToLower();
+        word2 = word2.Replace(" ", "").ToLower();
+
+        if (word1.Length != word2.Length)
+            return false;
+        
+        foreach (var letter in word1)
+        {
+            if (dict1.ContainsKey(letter))
+            {
+                dict1[letter] += 1;
+            }
+            else
+            {
+                dict1.Add(letter, 1);
+            }
+        }
+
+        foreach (var letter in word2)
+        {
+            if (dict2.ContainsKey(letter))
+            {
+                dict2[letter] += 1;
+            }
+            else
+            {
+                dict2.Add(letter, 1);
+            }
+        }
+
+        foreach (var kvp in dict1)
+        {
+            // Se a letra não existe no dict2 OU se a contagem é diferente
+            if (!dict2.ContainsKey(kvp.Key) || dict2[kvp.Key] != kvp.Value)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /// <summary>

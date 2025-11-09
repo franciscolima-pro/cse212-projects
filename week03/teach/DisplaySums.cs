@@ -29,5 +29,18 @@
     /// <param name="numbers">array of integers</param>
     private static void DisplaySumPairs(int[] numbers) {
         // TODO Problem 2 - This should print pairs of numbers in the given array
+
+
+        for(int item = 0; item < numbers.Length; item++)
+        {
+            for(int item2 = 1; item2 < numbers.Length; item2++)
+            {
+                if(numbers[item] + numbers[item2] == 10)
+                {
+                    Console.WriteLine($"{numbers[item]} {numbers[item2]}");
+                }
+            }
+        }
+
     }
 }
