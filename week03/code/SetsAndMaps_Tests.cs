@@ -27,7 +27,7 @@ public class FindPairsTests
     }
 
     [TestMethod]
-    public void FindPairs_SameChar()
+    public void FindPairs_SameChar() 
     {
         var actual = SetsAndMaps.FindPairs(["ab", "aa", "ba"]);
         var expected = new[] { "ba & ab" };
@@ -50,7 +50,7 @@ public class FindPairsTests
     public void FindPairs_ThreePairsNumbers()
     {
         var actual = SetsAndMaps.FindPairs(["23", "84", "49", "13", "32", "46", "91", "99", "94", "31", "57", "14"]);
-        var expected = new[] { "32 & 23", "94 & 49", "31 & 13" };
+        var expected = new[] { "32 & 23", "94 & 49", "31 & 13" }; 
 
         Assert.AreEqual(expected.Length, actual.Length);
         Assert.AreEqual(Canonicalize(expected), Canonicalize(actual));
@@ -69,7 +69,7 @@ public class FindPairsTests
     [TestMethod, Timeout(60_000)]
     public void FindPairs_NoPairs_Efficiency()
     {
-        // Calibrate baseline CPU performance
+        // Calibrate baseline CPU performance erro: Test 'FindPairs_NoPairs_Efficiency' exceeded execution timeout period.
         double CalibrateCpuSpeed()
         {
             var sw = Stopwatch.StartNew();

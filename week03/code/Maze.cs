@@ -26,6 +26,24 @@ public class Maze
     }
 
     // TODO Problem 4 - ADD YOUR CODE HERE
+    private void Move(int directionIndex, int dx, int dy)
+    {
+        if (!_mazeMap.TryGetValue((_currX, _currY), out var moves))
+            throw new InvalidOperationException("Invalid maze state: current cell not found!");
+
+        if (!moves[directionIndex])
+            throw new InvalidOperationException("Can't go that way!");
+
+        int newX = _currX + dx;
+        int newY = _currY + dy;
+
+        if (!_mazeMap.ContainsKey((newX, newY)))
+            throw new InvalidOperationException("Can't go that way!");
+
+        _currX = newX;
+        _currY = newY;
+    }
+    
     /// <summary>
     /// Check to see if you can move left.  If you can, then move.  If you
     /// can't move, throw an InvalidOperationException with the message "Can't go that way!".
@@ -33,15 +51,7 @@ public class Maze
     public void MoveLeft()
     {
         // FILL IN CODE
-        bool[] moves = _mazeMap[(_currX, _currY)];
-        if (moves[0]) // left
-        {
-            _currX -= 1;
-        }
-        else
-        {
-            throw new InvalidOperationException("Can't go that way!");
-        }
+        Move(0, -1,  0);
     }
 
     /// <summary>
@@ -51,15 +61,7 @@ public class Maze
     public void MoveRight()
     {
         // FILL IN CODE
-        bool[] moves = _mazeMap[(_currX, _currY)];
-        if (moves[1]) // right
-        {
-            _currX += 1;
-        }
-        else
-        {
-            throw new InvalidOperationException("Can't go that way!");
-        }
+        Move(1, +1,  0);
     }
 
     /// <summary>
@@ -69,15 +71,7 @@ public class Maze
     public void MoveUp()
     {
         // FILL IN CODE
-        bool[] moves = _mazeMap[(_currX, _currY)];
-        if (moves[2]) // up
-        {
-            _currY += 1;
-        }
-        else
-        {
-            throw new InvalidOperationException("Can't go that way!");
-        }
+        Move(2,  0, +1);
     }
 
     /// <summary>
@@ -87,15 +81,7 @@ public class Maze
     public void MoveDown()
     {
         // FILL IN CODE
-        bool[] moves = _mazeMap[(_currX, _currY)];
-        if (moves[3]) // down   
-        {
-            _currY -= 1;
-        }
-        else
-        {
-            throw new InvalidOperationException("Can't go that way!");
-        }
+        Move(3,  0, -1);
     }
 
     public string GetStatus()
